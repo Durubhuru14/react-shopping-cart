@@ -45,7 +45,7 @@ export default function ShoppingCartDialog({ open, onClose }) {
     /* Sends request to backend */
   }
   const checkout = async () => {
-    await fetch("http://localhost:3000/checkout", {
+    await fetch(`${import.meta.env.VITE_DOMAIN}/checkout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
