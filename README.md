@@ -1,12 +1,89 @@
-# React + Vite
+# React Shopping Cart
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern e-commerce shopping cart application built with React, Tailwind CSS, and Headless UI.
 
-Currently, two official plugins are available:
+## Screenshots
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![ss1](https://i.imgur.com/bCVaYDU.png)
+![ss2](https://i.imgur.com/0sElYRY.png)
+![ss3](https://i.imgur.com/oialXRy.png)
+![ss4](https://i.imgur.com/Dn7azK7.png)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Product listing with images and details
+- Add products to cart
+- Update product quantities
+- Remove products from cart
+- Clear entire cart
+- Responsive design for all screen sizes
+- Toast notifications for user feedback
+- Shopping cart sidebar/dialog
+- Subtotal calculation
+
+## Technologies Used
+
+- React
+- Tailwind CSS
+- Headless UI (for accessible components)
+- Heroicons (for SVG icons)
+- React Toastify (for notifications)
+- React Context API (for state management)
+
+## Installation
+
+- Clone the repository:
+   ```bash
+   git clone https://github.com/Durubhuru14/react-shopping-cart.git
+   ```
+
+- Navigate to the project directory:
+   ```bash
+   cd react-shopping-cart
+   ```
+
+- Install dependencies:
+   ```bash
+   npm install
+   ```
+
+- Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Project Structure
+
+```
+src/
+├── assets/                 # Static assets like images
+├── Components/             # React components
+│   ├── Navbar.jsx          # Navigation bar component
+│   ├── ProductLists.jsx    # Product listing component
+│   └── ShoppingCartDialog.jsx # Shopping cart dialog
+├── Context/                # Context providers
+│   └── CartContext.jsx     # Cart context provider
+├── data/                   # Data files
+│   └── products.js         # Product data
+├── Reducers/               # Reducers
+│   └── CartReducer.jsx     # Cart reducer logic
+├── App.css                 # Main CSS file
+├── App.jsx                 # Main App component
+└── main.jsx                # Entry point
+```
+
+## Context API
+
+The app uses React Context API for state management with a cart reducer that handles:
+- Adding items to cart
+- Updating item quantities
+- Removing items from cart
+- Clearing the entire cart
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## Author
+
+[Durubhuru](https://github.com/Durubhuru14)
