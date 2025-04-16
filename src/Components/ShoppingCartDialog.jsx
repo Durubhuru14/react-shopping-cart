@@ -13,24 +13,54 @@ import { toast } from "react-toastify";
 export default function ShoppingCartDialog({ open, onClose }) {
   const { cartState, dispatch } = useCart();
 
+  {
+    /* Increment or Decrements quantity of product attached to input:number on change */
+  }
   const updateQuantity = (product, value) => {
     dispatch({ type: "UPDATE", payload: { product, value } });
   };
 
+  {
+    /* Used to remove product from cart */
+  }
   const removeProduct = (product) => {
     dispatch({ type: "REMOVE", payload: { product } });
-    toast.success("Product successfully removed from the cart!")
+    toast.success("Product successfully removed from the cart!");
   };
 
-  const clearCart = () => {
-    dispatch({type: "CLEAR_CART"})
-    toast.success("The cart is successfully cleared!")
+  {
+    /* Clear whole cart */
   }
+  const clearCart = () => {
+    dispatch({ type: "CLEAR_CART" });
+    toast.success("The cart is successfully cleared!");
+  };
 
   let subtotal = 0;
   cartState.forEach((product) => {
     subtotal += product.price * (product.quantity || 1);
   });
+
+  {
+    /* Sends request to backend */
+  }
+  const checkout = async () => {
+    await fetch("http://localhost:3000/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ items: cartState }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        if (response.url) {
+          window.location.assign(response.url);
+        }
+      });
+  };
 
   return (
     <Dialog open={open} onClose={onClose} className="relative z-10">
@@ -139,10 +169,16 @@ export default function ShoppingCartDialog({ open, onClose }) {
                     Shipping and taxes calculated at checkout.
                   </p>
                   <div className="mt-6 flex flex-col gap-1 justify-center">
-                    <button className="flex grow cursor-pointer items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700">
+                    <button
+                      onClick={checkout}
+                      className="flex grow cursor-pointer items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700"
+                    >
                       Checkout
                     </button>
-                    <button onClick={clearCart} className="flex grow cursor-pointer items-center justify-center rounded-md border border-transparent bg-red-600 px-3 py-3 text-base font-medium text-white shadow-xs hover:bg-red-700">
+                    <button
+                      onClick={clearCart}
+                      className="flex grow cursor-pointer items-center justify-center rounded-md border border-transparent bg-red-600 px-3 py-3 text-base font-medium text-white shadow-xs hover:bg-red-700"
+                    >
                       Clear Cart
                     </button>
                   </div>
